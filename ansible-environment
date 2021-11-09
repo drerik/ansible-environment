@@ -1,19 +1,15 @@
 #!/bin/bash
-ANSIBLE_ENVIRONMENT=~/.ansible-environment/environment
-
-if [[ -d $PWD/environment ]]
-then
-    ANSIBLE_ENVIRONMENT=$PWD/environment
-fi
 
 PROJECT_NAME="$USER-$(basename $PWD)"
-sudo docker build --pull -t ansible-environment .
+# sudo docker build --pull -t ghcr.io/drerik/ansible-environment:main .
 sudo docker run -it --rm \
-    -e ANSIBLE_INVENTORY=/runner/inventory \
+    -e PROJECT_NAME \
+    --network host \
+    -e ANSIBLE_INVENTORY=/workspace/inventory \
     -h ansible-runner-$PROJECT_NAME \
     -v $HOME/.ssh/id_rsa:/root/.ssh/id_rsa:ro \
     -v $HOME/.ssh/known_hosts:/root/.ssh/known_hosts:ro \
-    -v $ANSIBLE_INVENTORY:/runner/inventory:ro \
-    -v $PWD:/runner/project:ro \
-    --name ansible-runner-$PROJECT_NAME \
-    $ANSIBLE_ENVIRONMENT_EXTRAS ansible-runner-$PROJECT_NAME bash   
+    -v $ANSIBLE_INVENTORY:/workspace/inventory:ro \
+    -v $PWD:/workspace/project:ro \
+    --name ansible-environment-$PROJECT_NAME \
+    $ANSIBLE_ENVIRONMENT_EXTRAS ghcr.io/drerik/ansible-environment:main bash   

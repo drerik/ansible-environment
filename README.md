@@ -4,7 +4,7 @@ Ansible environment in a docker container.
 
 ## Install
 ```bash
-sudo curl https://PLACEHOLDER/ansible-environment | sudo tee /usr/local/bin/ansible-environmet
+sudo curl https://raw.githubusercontent.com/drerik/ansible-environment/main/ansible-environment | sudo tee /usr/local/bin/ansible-environmet
 sudo chmod 755 /usr/local/bin/ansible-environment
 ```
 
@@ -28,6 +28,7 @@ export ANSIBLE_ENVIRONMENT_EXTRAS="-e OS_CLOUD=mycloud -v $HOME/.config/openstac
 
 ### Python modules
 
+git clone git@gitlab.redpill-linpro.com:erikks/ansible-environment.git ~/.ansible-environment
 ### Ansible roles
 
 ### Ansible Collections
