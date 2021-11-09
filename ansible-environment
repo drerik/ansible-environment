@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ -f ~/.ansible-environment ]
+then
+	. ~/.ansible-environment
+fi
+
 PROJECT_NAME="$USER-$(basename $PWD)"
 # sudo docker build --pull -t ghcr.io/drerik/ansible-environment:main .
 sudo docker run -it --rm \

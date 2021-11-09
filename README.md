@@ -8,8 +8,9 @@ sudo curl https://raw.githubusercontent.com/drerik/ansible-environment/main/ansi
 sudo chmod 755 /usr/local/bin/ansible-environment
 ```
 
-## Configuration variables
+## Configuration
 
+Create a file called `.ansible-environment`
 
 - `ANSIBLE_INVENTORY`: Path to ansible inventory
 - `ANSIBLE_ENVIRONMENT_EXTRAS`: Extra container parameters ( volumes, environnment variables etc. )
@@ -21,15 +22,6 @@ export ANSIBLE_INVENTORY=$HOME/projects/ansible/inventory
 export ANSIBLE_ENVIRONMENT_EXTRAS="-e OS_CLOUD=mycloud -v $HOME/.config/openstack/clouds.yaml:/runner/.config/openstack/clouds.yaml:ro"
 ```
 
-## Environment dependencies
-
-### System packages
-
-
-### Python modules
-
-git clone git@gitlab.redpill-linpro.com:erikks/ansible-environment.git ~/.ansible-environment
-### Ansible roles
 
 ### Ansible Collections
 
