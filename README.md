@@ -4,7 +4,7 @@ Ansible environment in a docker container.
 
 ## Install
 ```bash
-sudo curl https://raw.githubusercontent.com/drerik/ansible-environment/main/ansible-environment | sudo tee /usr/local/bin/ansible-environmet
+sudo curl https://raw.githubusercontent.com/drerik/ansible-environment/main/ansible-environment | sudo tee /usr/local/bin/ansible-environment
 sudo chmod 755 /usr/local/bin/ansible-environment
 ```
 
