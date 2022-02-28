@@ -6,4 +6,3 @@ ADD requirements.txt /requirements.txt
 RUN pip3 install -r /requirements.txt
 RUN mkdir /workspace
 WORKDIR /workspace
-#RUN ansible-galaxy collection install openstack.cloud
