@@ -10,7 +10,13 @@ sudo chmod 755 /usr/local/bin/ansible-environment
 
 ## Configuration
 
-Create a file called `.ansible-environment`
+Configuration can be set globaly by creating a bash source file. The script will look for the following files in this order and source them:
+
+- `~/.ansible-environment`: Global config for all your all ansible environments
+- `~/.ansible-environment-$PWD`: Local config per envirionment. Add your environement specifics for that project. $PWD is your projects work folder.
+- `.ansible-environment`: Project specific config. If your inventory is located inside the project structure, you can define `ANSIBLE_INVENTORY` here.
+
+These two environments variables can be set here.
 
 - `ANSIBLE_INVENTORY`: Path to ansible inventory
 - `ANSIBLE_ENVIRONMENT_EXTRAS`: Extra container parameters ( volumes, environnment variables etc. )
