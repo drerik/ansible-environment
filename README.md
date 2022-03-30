@@ -25,11 +25,23 @@ Example:
 
 ```bash
 export ANSIBLE_INVENTORY=$HOME/projects/ansible/inventory
-export ANSIBLE_ENVIRONMENT_EXTRAS="-e OS_CLOUD=mycloud -v $HOME/.config/openstack/clouds.yaml:/runner/.config/openstack/clouds.yaml:ro"
+export ANSIBLE_ENVIRONMENT_EXTRAS=""
+```
+### Local ssh key
+
+Mount you ssh key into the ansible-environment
+
+```bash
+export ANSIBLE_ENVIRONMENT_EXTRAS="$ANSIBLE_ENVIRONMENT_EXTRAS -v $HOME/.ssh/id_rsa.pub:/root/.ssh/id_rsa.pub:ro
 ```
 
-
 ### Ansible Collections
+
+Mount your local ansible collection (" $HOME/Workspace/ansible/ansible-collections ") into your ansible-environment.
+
+```bash
+export ANSIBLE_ENVIRONMENT_EXTRAS="$ANSIBLE_ENVIRONMENT_EXTRAS -v $HOME/Workspace/ansible/ansible-collections:/workspace/collections/ansible_collections -e ANSIBLE_COLLECTIONS_PATHS=/workspace/collections"
+```
 
 ## Usefull commands
 
