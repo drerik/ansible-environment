@@ -1,5 +1,12 @@
 #!/bin/bash
 
+export ANSIBLE_ENVIRONMENT_IMAGE=ghcr.io/drerik/ansible-environment:main
+
+if [ "x$CONTAINER_RUNTIME" == "x" ]
+then
+    CONTAINER_RUNTIME=podman
+fi
+
 if [ -f ~/.ansible-environment ]
 then
 	. ~/.ansible-environment
@@ -17,14 +24,16 @@ fi
 
 PROJECT_NAME="$USER-$(basename $PWD)"
 # sudo docker build --pull -t ghcr.io/drerik/ansible-environment:main .
-sudo docker run -it --rm \
+echo "Starting with $CONTAINER_RUNTIME as runtime"
+
+$CONTAINER_RUNTIME run -it --rm \
     -e PROJECT_NAME \
     --network host \
     -e ANSIBLE_INVENTORY=/workspace/inventory \
     -h ansible-runner-$PROJECT_NAME \
     -v $HOME/.ssh/id_rsa:/root/.ssh/id_rsa:ro \
-    -v $HOME/.ssh/known_hosts:/root/.ssh/known_hosts:ro \
-    -v $ANSIBLE_INVENTORY:/workspace/inventory:ro \
-    -v $PWD:/workspace/project:ro \
+    -v $HOME/.ssh/known_hosts:/root/.ssh/known_hosts \
+    -v $ANSIBLE_INVENTORY:/workspace/inventory \
+    -v $PWD:/workspace/project \
     --name ansible-environment-$PROJECT_NAME \
-    $ANSIBLE_ENVIRONMENT_EXTRAS ghcr.io/drerik/ansible-environment:main bash   
+    $ANSIBLE_ENVIRONMENT_EXTRAS $ANSIBLE_ENVIRONMENT_IMAGE bash   

@@ -1,6 +1,6 @@
 # ansible-environment
 
-Ansible environment in a docker container.
+Ansible environment in a container. Default Container engine is podman.
 
 ## Install
 ```bash
@@ -41,6 +41,28 @@ Mount your local ansible collection (" $HOME/Workspace/ansible/ansible-collectio
 
 ```bash
 export ANSIBLE_ENVIRONMENT_EXTRAS="$ANSIBLE_ENVIRONMENT_EXTRAS -v $HOME/Workspace/ansible/ansible-collections:/workspace/collections/ansible_collections -e ANSIBLE_COLLECTIONS_PATHS=/workspace/collections"
+```
+
+### Custom ansible-environment container image
+
+You can create your own ansible-environment image by extending the original `ghcr.io/drerik/ansible-environment:main` image, then in your .ansible-envrionment export the `ANSIBLE_ENVIRONMENT_IMAGE` variable with your own image
+
+```bash
+export ANSIBLE_ENVIRONMENT_IMAGE=ghcr.io/drerik/ansible-environment:main
+```
+
+### Use docker instead of podman as container engine
+
+To change the container engine to docker, you can configure the `CONTAINER_RUNTIME` environment variable
+
+```bash
+export CONTAINER_RUNTIME=docker
+```
+
+If you need to run docker with sudo, you can set the `CONTAINER_RUNTIME` like this:
+
+```bash
+export CONTAINER_RUNTIME=sudo docker
 ```
 
 ## Usefull commands
